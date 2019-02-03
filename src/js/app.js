@@ -51,48 +51,43 @@ const jtrello = (function($) {
   }
 
   /* ============== Metoder för att hantera listor nedan ============== */
+
+
   function createList() {
     event.preventDefault();
-    // console.log("This should create a new list");
-    $(this).parent().before(
-      `<div class="column">
-              <div class="list">
-                  <div class="list-header">
-                      New column
-                      <button class="button delete">X</button>
-                  </div>
-                  <ul class="list-cards">
-                      <li class="add-new">
-                          <form class="new-card" action="index.html">
-                              <input type="text" name="title" placeholder="Please name the card" />
-                              <button class="button add">Add new card</button>
-                          </form>
-                      </li>
-                  </ul>
-              </div>
-          </div>`);
-    }
-    $(this);
-    // debugger;
 
-  //   $(this).parent().before(
-  //   `<div class="column">
-  //           <div class="list">
-  //               <div class="list-header">
-  //                   New column
-  //                   <button class="button delete">X</button>
-  //               </div>
-  //               <ul class="list-cards">
-  //                   <li class="add-new">
-  //                       <form class="new-card" action="index.html">
-  //                           <input type="text" name="title" placeholder="Please name the card" />
-  //                           <button class="button add">Add new card</button>
-  //                       </form>
-  //                   </li>
-  //               </ul>
-  //           </div>
-  //       </div>`);
-  // }
+    let form = $('<form class="new-card" action="index.html"></form>')
+      .append(
+        '<input type="text" name="title" placeholder="Please name the card" />'
+      )
+      .append('<button class="button add">Add new card</button>');
+
+    let li = $('<li class="add-new"></li>').append(form);
+
+    let cards = $('<ul class="list-cards"></ul>').append(li);
+
+    let header = $('<div class="list-header">New column</div>').append(
+      '<button class="button delete">X</button>'
+    );
+
+    let list = $('<div class="list"></div>')
+      .append(header)
+      .append(cards);
+
+    /* Converted html snippet to jQuery strings */
+
+    let newlyCreatedList = $('<div class="column"></div>').append(list);
+
+    //console.log("This should create a new list");
+    $(this)
+      .parent()
+      .before(newlyCreatedList);
+
+    init(); /* this ensures that newlyCreatedList will be incorporated
+            into the existing DOM and accept information into its newly
+            created cards (become like the index.html cards). */
+  }
+  $(this);
 
   function deleteList() {
     console.log("This should delete the list you clicked on");
@@ -133,7 +128,7 @@ const jtrello = (function($) {
 
   // Init metod som körs först
   function init() {
-    console.log(":::: Initializing JTrello ::::");
+    //console.log(":::: Initializing JTrello ::::");
     // Förslag på privata metoder
     captureDOMEls();
     createTabs();
@@ -141,7 +136,7 @@ const jtrello = (function($) {
 
     bindEvents();
     $;
-    // debugger;
+    debugger;
   }
 
   // All kod här
