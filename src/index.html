@@ -74,9 +74,24 @@
     </div>
 
     <div id="list-creation-dialog" title="Create new list" style="height: 40px">
-        <form> 
+        <form>
             <input type="text" name="title" placeholder="List title" />
         </form>
+    </div>
+
+    <div id="new-list-template" class="list" style="display: none">
+        <div class="list-header">
+            New column
+            <button class="button delete">X</button>
+        </div>
+        <ul class="list-cards">
+            <li class="add-new">
+                <form class="new-card" action="index.html">
+                    <input type="text" name="title" placeholder="Please name the card" />
+                    <button class="button add">Add new card</button>
+                </form>
+            </li>
+        </ul>
     </div>
 </body>
 </html>
